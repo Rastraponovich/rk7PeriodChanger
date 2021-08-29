@@ -1,8 +1,8 @@
 {
-    "name": "front",
+    "name": "period-changer",
     "version": "1.0.0",
     "main": "main/index.js",
-    "productName": "WorkerChangerNextJs",
+    "productName": "PeriodChangerNextJS",
     "scripts": {
         "clean": "rimraf .next",
         "dev": "next dev",
