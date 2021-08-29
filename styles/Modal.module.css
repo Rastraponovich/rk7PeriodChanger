@@ -1,0 +1,38 @@
+.wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}
+
+.fade {
+    background-color: #000;
+    opacity: 0.4;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    animation: moveWrapper 0.3s 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.content {
+    /* padding: 1rem 2rem; */
+    background-color: transparent;
+    z-index: 2;
+    animation: move 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: opacity 0.3s ease-in-out;
+}
+
+@keyframes move {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

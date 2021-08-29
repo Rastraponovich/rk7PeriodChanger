@@ -1,0 +1,11 @@
+.root {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .root {
+        justify-content: center;
+    }
+}
