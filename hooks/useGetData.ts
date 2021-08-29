@@ -1,13 +1,13 @@
 import axios from "axios"
 import { Agent } from "https"
 
-import { IAuth } from "interfaces/types"
+import { IAuth, IResponse, IStatusResponse } from "interfaces/types"
 
 const agent = new Agent({
     rejectUnauthorized: false,
     secureProtocol: "TLSv1_method",
 })
-export const sendData = async (xmlQuery: string): Promise<string | any> => {
+export const sendData = async (xmlQuery: string): Promise<IResponse> => {
     try {
         const credentials: IAuth = {
             username: process.env.RK7_LOGIN,

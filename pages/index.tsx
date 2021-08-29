@@ -19,6 +19,7 @@ import PeriodCard from "@/components/PeriodCard/PeriodCard"
 import Layout from "@/components/Layout/Layout"
 import InfoBlock from "@/components/InfoBlock/InfoBlock"
 import Modal from "@/components/UI/Modal/Modal"
+import { getStatusAction } from "store/actions/statusActions"
 
 interface InputProps extends RootState {
     dispatch: NextThunkDispatch
@@ -32,9 +33,16 @@ const MainPage: NextPage<InputProps> = ({ dispatch, periodStore }) => {
         handleLoad()
     }, [reload])
 
+    useEffect(() => {
+        if (error) {
+            push("/401")
+        }
+    }, [error])
+
     const handleLoad = async () => {
         await dispatch(await setLoadingAction(true))
         await dispatch(await getPeriodsAction())
+        await dispatch(await getStatusAction())
     }
 
     const onClick = async (guid: string) => {

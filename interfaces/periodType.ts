@@ -65,6 +65,8 @@ export interface PeriodState {
     selectedPeriodId: string
     reload?: boolean
     loading: boolean
+    code?: string | null
+    status?: { Status?: string }
 }
 export interface IDays {
     name: string
@@ -114,7 +116,14 @@ interface selectPeriodAction {
 
 interface getPeriodsErrorAction {
     type: PeriodActionTypes.GET_PERIODS_ERROR
-    payload: any
+    payload: IResponseError
+}
+
+export interface IResponseError {
+    error: boolean
+    message: string
+    status: { Status: string }
+    code: string | null
 }
 
 interface setPeriodAction {

@@ -1,10 +1,11 @@
 import {
     IPeriod,
+    IResponseError,
     ITPeriodDetail,
     PeriodAction,
     PeriodActionTypes,
 } from "@/interfaces/periodType"
-import { IStatusResponse } from "@/interfaces/types"
+import { IResponse, IStatusResponse } from "@/interfaces/types"
 import axios, { AxiosResponse } from "axios"
 import { Dispatch } from "react"
 
@@ -20,7 +21,9 @@ export const getPeriodsAction = () => {
                     type: PeriodActionTypes.GET_PERIODS_ERROR,
                     payload: {
                         error: true,
-                        message: "Произошла ошибка",
+                        message: response.data.message,
+                        status: { Status: response.data.message },
+                        code: response.data.code,
                     },
                 })
             } else {
@@ -30,12 +33,15 @@ export const getPeriodsAction = () => {
                 })
             }
         } catch (error) {
-            console.log(error)
+            console.log(error, "aa")
             dispatch({
                 type: PeriodActionTypes.GET_PERIODS_ERROR,
                 payload: {
                     error: true,
-                    message: "Произошла ошибка загрузки пользователей",
+                    message: error.message,
+                    status: { Status: "ошибка" },
+
+                    code: "500",
                 },
             })
         }
@@ -55,7 +61,9 @@ export const getOnePeriodAction = (guid: string) => {
                     type: PeriodActionTypes.GET_PERIODS_ERROR,
                     payload: {
                         error: true,
-                        message: "Произошла ошибка",
+                        message: response.data.message,
+                        status: { Status: response.data.message },
+                        code: response.data.code,
                     },
                 })
             } else {
@@ -70,7 +78,9 @@ export const getOnePeriodAction = (guid: string) => {
                 type: PeriodActionTypes.GET_PERIODS_ERROR,
                 payload: {
                     error: true,
-                    message: "Произошла ошибка загрузки пользователей",
+                    message: error.message,
+                    status: { Status: "ошибка" },
+                    code: "500",
                 },
             })
         }
@@ -125,7 +135,7 @@ export const setPeriodAction = (period: IPeriod) => {
                     type: PeriodActionTypes.SET_PERIOD_ERROR,
                     payload: {
                         error: true,
-                        message: "Произошла ошибка",
+                        message: "Произошла ошибка сохраниения",
                     },
                 })
             } else {
@@ -140,7 +150,7 @@ export const setPeriodAction = (period: IPeriod) => {
                 type: PeriodActionTypes.SET_PERIOD_ERROR,
                 payload: {
                     error: true,
-                    message: "Произошла ошибка загрузки пользователей",
+                    message: "Произошла ошибка сохраниения",
                 },
             })
         }

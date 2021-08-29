@@ -8,7 +8,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const { guid } = req.body
 
     const result = await sendData(getOnePeriod(guid))
-
     if (result.error) {
         return res.status(200).json({
             error: true,

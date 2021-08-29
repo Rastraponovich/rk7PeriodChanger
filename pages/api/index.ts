@@ -6,16 +6,24 @@ import { getPeriods } from "@/schemas/refData.schema"
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     const result = await sendData(
-        getPeriods({ RefName: "Periods", MainParentIdent: 1015004 })
+        getPeriods({
+            RefName: "Periods",
+            MainParentIdent: Number(process.env.MAINPARENTIDENT),
+        })
     )
 
-    //PeriodDetails
     if (result.error) {
+        let message = "Произошла ошибка"
+
+        if (result.code === "ECONNABORTED") {
+            message = "Ошибка подключения"
+        }
+
         return res.status(200).json({
             error: true,
-            message: "Произошла ошибка",
-            status: { Status: "Произошла ошибка" },
-            ...result,
+            message,
+            status: { Status: message },
+            code: result.code || null,
         })
     } else {
         const { CommandResult, ...queryResult } = useParser(

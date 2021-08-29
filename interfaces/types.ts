@@ -1,3 +1,5 @@
+import { IResponseError } from "./periodType"
+
 export interface IAuth {
     username: string
     password: string
@@ -67,7 +69,7 @@ export interface IResponse {
     code: null | number | string
 }
 
-export interface IStatusResponse {
+export interface IStatusResponse extends IResponseError {
     error: boolean
     message: string
     queryResult?: IQueryResult
